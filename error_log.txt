@@ -1,6 +1,0 @@
-Error: Error: Command failed: ??????? - /src
-
-STDOUT: 
-STDERR: ??????? - /src
-
-COMMAND: convert "./src/map_merge.png" "-crop" "52x11+146+536" "./src/mapimg_27.png"

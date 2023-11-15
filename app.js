@@ -1,12 +1,13 @@
+const fs = require('fs');
+const plist = require('plist');
+const gm = require('gm').subClass({ imageMagick: true });
+const Jimp = require('jimp');
 const path = require('path');
 
-const fs = require('fs'),
-    plist = require('plist'),
-    gm = require('gm').subClass({ imageMagick: true });
-const Jimp = require('jimp');
+const file = process.argv[2];
 
-// const file = process.argv.splice(2).toString();
-const file = path.join(__dirname, "src/map_merge.plist");
+console.log("参数--->>", process.argv);
+console.log("文件--->>", file);
 
 let frames, textureRect, frame, img_name, output_name, coordinate_x, coordinate_y, img_width, img_height, rotated, buf, img_arr = [],
     splitIdx = 0, maxSplitIdx;
@@ -152,17 +153,18 @@ async function spriteSpliter(img_name, output_name, width, height, x, y, rotated
     // }
     // });
 
-
+    const arr = img_name.split(".");
+    const dirName = arr[0];
     Jimp.read(`./src/${img_name}`, (err, image) => {
         if (err) {
             console.error('Error:', err);
             return;
         }
-        let aaa = image.crop(Number(x), Number(y), Number(width), Number(height)) // 裁剪参数：起始坐标 x, y 和宽高 w, h
-        // if (rotated) {
-        //     aaa = aaa.rotate(-90, "transparent");
-        // }
-        aaa.write(`./output/${output_name}.png`, (err) => {
+        let _image = image.crop(Number(x), Number(y), Number(width), Number(height)) // 裁剪参数：起始坐标 x, y 和宽高 w, h
+        if (rotated) {
+            _image = _image.rotate(90, "transparent");
+        }
+        _image.write(`./output/${dirName}/${output_name}.png`, (err) => {
             if (!err) console.log('Cropped image saved!');
             else console.error('Error cropping and saving image:', err);
         });

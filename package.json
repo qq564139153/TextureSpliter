@@ -1,4 +1,11 @@
 {
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "split_app": "node app.js",
+    "split": "node index.js"
+  },
   "dependencies": {
     "gm": "^1.25.0",
     "jimp": "^0.22.10",

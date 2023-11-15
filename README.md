@@ -81,6 +81,9 @@ npm i plist --save
 $ node app.js [json文件相对路径|plist文件相对路径](ps.图集文件需要在同一目录)
 
 ```sh
+
+$ npm run split (推荐)
+
 $ node app.js ./src/button.json
 
 $ node app.js ./src/timer.plist
